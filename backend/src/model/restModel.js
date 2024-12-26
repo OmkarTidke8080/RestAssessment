@@ -11,12 +11,35 @@ const restSchema = new mongoose.Schema(
     MobileNumber: {
       type: Number,
     },
-    Email : {
-        type: String
+    Email: {
+      type: String,
     },
-    Password:{
+    GST: {
+      type: String,
+    },
+    Address: {
+      type: String,
+    },
+    DateOfJoining: {
+      type: Date,
+    },
+    DateOfExpiry: {
+      type: Date,
+    },
+    Password: {
+      type: String,
+    },
+    NumberOfBranches: {
+      type: Number,
+    },
+    Status : {
       type:String
+    },
+    
+    SubscriptionPlan : {
+        type: String
     }
+  
   },
   { timestamps: true }
 );

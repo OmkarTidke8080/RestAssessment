@@ -11,11 +11,11 @@ export const totalRestaurentRegistered = async (req, res) => {
     totalRestaurents,
   });
 };
+
 export const activeRestaurents = async (req, res) => {
-    const query = { active: true };
+  const query = { Active: true };
 
   const totalRestaurents = await Rest.countDocuments(query);
-
 
   if (totalRestaurents === 0) {
     return res.status(404).json({ message: "No Restaurents found" });
@@ -26,9 +26,8 @@ export const activeRestaurents = async (req, res) => {
   });
 };
 
-
 export const inactiveRestaurents = async (req, res) => {
-        const query = { active: false };
+  const query = { active: false };
 
   const totalRestaurents = await Rest.countDocuments(query);
 

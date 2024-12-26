@@ -31,7 +31,7 @@ res.cookie("refreshToken", tokens.refreshToken, {
     await restaurent.save();
 
     res.status(200).json({
-      message:"Restaurent Registered Successfully",
+      message:"OTP sent successfully",
       restaurent
     });
   } catch (error) {

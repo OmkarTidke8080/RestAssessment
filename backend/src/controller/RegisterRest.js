@@ -10,7 +10,6 @@
   console.log(restDetails);
 
   try {
-    
     restDetails.Password = await bcrypt.hash(restDetails.Password, saltRounds);
 
     const restaurent = new Rest(restDetails);

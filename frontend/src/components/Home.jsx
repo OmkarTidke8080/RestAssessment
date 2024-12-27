@@ -26,7 +26,7 @@ function Home() {
 
       if (response.status === 200) {
         const data = response.data;
-        setTotalNumber(data.totalNumber);
+        setTotalNumber(data.totalRestaurents);
         setActive(data.active);
         setInActive(data.inActive);
       }
@@ -48,12 +48,14 @@ function Home() {
 
       if (response.status === 200) {
         const data = response.data;
-        setActive(data.active);
+        setActive(data.totalRestaurents); 
       }
     } catch (error) {
-      console.error("Error during signin:", error);
+      console.error("Error fetching active restaurants:", error);
     }
   };
+
+
   const totalInActiveRestaurents = async () => {
     try {
       const response = await axios.get(
@@ -69,7 +71,7 @@ function Home() {
       if (response.status === 200) {
         const data = response.data;
 
-        setInActive(data.inActive);
+        setInActive(data.totalRestaurents);
       }
     } catch (error) {
       console.error("Error during signin:", error);
@@ -88,7 +90,7 @@ function Home() {
           <h2 className="text-xl font-semibold text-center mb-4">
             Total Restaurants
           </h2>
-          <p className="text-4xl font-bold text-center">{totalNumber || 10}</p>
+          <p className="text-4xl font-bold text-center">{totalNumber || 0}</p>
         </div>
 
         {/* Active Restaurants */}
@@ -97,7 +99,7 @@ function Home() {
             Active Restaurants
           </h2>
           <p className="text-4xl text-green-600 font-bold text-center">
-            {active || 7}
+            {active || 0}
           </p>
         </div>
 
@@ -107,7 +109,7 @@ function Home() {
             Inactive Restaurants
           </h2>
           <p className="text-4xl text-red-600 font-bold text-center">
-            {inActive || 3}
+            {inActive || 0}
           </p>
         </div>
       </div>

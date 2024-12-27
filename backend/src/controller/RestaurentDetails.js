@@ -13,29 +13,40 @@ export const totalRestaurentRegistered = async (req, res) => {
 };
 
 export const activeRestaurents = async (req, res) => {
-  const query = { Active: true };
+  try {
+    const query = { Status: "Active" };
 
-  const totalRestaurents = await Rest.countDocuments(query);
+    const totalRestaurents = await Rest.countDocuments(query);
 
-  if (totalRestaurents === 0) {
-    return res.status(404).json({ message: "No Restaurents found" });
+    if (totalRestaurents === 0) {
+      return res.status(404).json({ message: "No Active Restaurants found" });
+    }
+
+    return res.status(200).json({
+      totalRestaurents,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Server Error" });
   }
-
-  return res.status(200).json({
-    totalRestaurents,
-  });
 };
 
+
 export const inactiveRestaurents = async (req, res) => {
-  const query = { active: false };
+  try {
+    const query = { Status: "Inactive" };
 
-  const totalRestaurents = await Rest.countDocuments(query);
+    const totalRestaurents = await Rest.countDocuments(query);
 
-  if (totalRestaurents === 0) {
-    return res.status(404).json({ message: "No Restaurents found" });
+    if (totalRestaurents === 0) {
+      return res.status(404).json({ message: "No Inactive Restaurants found" });
+    }
+
+    return res.status(200).json({
+      totalRestaurents,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Server Error" });
   }
-
-  return res.status(200).json({
-    totalRestaurents,
-  });
 };

@@ -1,10 +1,18 @@
  import Rest from "../model/restModel.js";
  import bcrypt from "bcrypt"
+ import { validationResult } from "express-validator";
+
  const saltRounds = 10;
 
  import { generateAccessToken } from "../middleware/auth.js";
  
  const registerRest = async (req, res) => {
+
+   const errors = validationResult(req);
+   if (!errors.isEmpty()) {
+     return res.status(400).json({ errors: errors.array() });
+   }
+
 
   const  restDetails  = req.body;
   console.log(restDetails);

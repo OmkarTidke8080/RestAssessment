@@ -1,5 +1,6 @@
 import Rest from "../model/restModel.js";
 import bcrypt from "bcrypt";
+import { validationResult } from "express-validator";
 import nodemailer from "nodemailer";
 
 import { generateAccessToken } from "../middleware/auth.js";
@@ -52,7 +53,13 @@ export const verifyOtp = async (req, res) => {
 
 export const SignIn = async (req, res) => {
   try {
+
+    
     const { Email, Password } = req.body;
+      const errors = validationResult(req);
+       if (!errors.isEmpty()) {
+         return res.status(400).json({ errors: errors.array() });
+       }
 
     // Find user by email
     const user = await Rest.findOne({ Email });

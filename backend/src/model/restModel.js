@@ -2,10 +2,15 @@ import mongoose from "mongoose";
 
 const restSchema = new mongoose.Schema(
   {
+    RestId: {
+      type: Number,
+      required: true,
+      unique: true, // Ensure no duplicates
+    },
     NameOfBusiness: {
       type: String,
     },
-    OwnerFullName: {
+    OwnerName: {
       type: String,
     },
     MobileNumber: {
@@ -16,6 +21,9 @@ const restSchema = new mongoose.Schema(
     },
     GST: {
       type: String,
+    },
+    Rest_Images: {
+      type: [String],
     },
     Address: {
       type: String,
@@ -32,14 +40,16 @@ const restSchema = new mongoose.Schema(
     NumberOfBranches: {
       type: Number,
     },
-    Status : {
-      type:String
+    NumberOfActiveBranches: {
+      type: Number,
     },
-    
-    SubscriptionPlan : {
-        type: String
-    }
-  
+    Status: {
+      type: String,
+    },
+
+    SubscriptionPlan: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

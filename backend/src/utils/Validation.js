@@ -12,7 +12,7 @@ const validateRestaurantDetails = [
     .matches(/^[A-Za-z\s]*$/)
     .withMessage("Name of Business should not contain special characters"),
 
-  body("OwnerFullName")
+  body("OwnerName")
     .isString()
     .trim()
     .notEmpty()
@@ -36,9 +36,9 @@ const validateRestaurantDetails = [
 
   body("GST")
     .isString()
-    .trim()
-    .matches(/^[0-9A-Z]{15}$/)
-    .withMessage("GST must be a valid 15-character alphanumeric string"),
+    .trim(),
+    // .matches(/^[0-9A-Z]{15}$/)
+    // .withMessage("GST must be a valid 15-character alphanumeric string"),
 
   body("Address")
     .isString()

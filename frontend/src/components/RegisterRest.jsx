@@ -14,32 +14,72 @@ function RegisterRest() {
     Email: "",
     GST: "",
     Address: "",
+    Rest_Images: [],
     DateOfJoining: "",
     DateOfExpiry: "",
     Password: "",
     NumberOfBranches: "",
-    Status:"",
+    NumberOfActiveBranches: "",
+    Status: "",
     SubscriptionPlan: "",
   });
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    const { name, value, type, files } = e.target;
+    if (type === "file") {
+      setData((prevData) => ({
+        ...prevData,
+        Rest_Images: files ? Array.from(files) : [],
+      }));
+    } else {
+      setData((prevData) => ({ ...prevData, [name]: value }));
+    }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (!Array.isArray(data.Rest_Images)) {
+      alert("Please upload valid images.");
+      return;
+    }
+
+    const formData = new FormData();
+    data.Rest_Images.forEach((image) => {
+      formData.append("Rest_Images", image);
+    });
+    formData.append("NameOfBusiness", data.NameOfBusiness);
+
+    formData.append("OwnerName", data.OwnerName);
+
+    formData.append("MobileNumber", data.MobileNumber);
+
+    formData.append("WhatsAppMobile", data.WhatsAppMobile);
+
+    formData.append("Email", data.Email);
+
+    formData.append("GST", data.GST);
+
+    formData.append("Address", data.Address);
+
+    formData.append("DateOfJoining", data.DateOfJoining);
+
+    formData.append("DateOfExpiry", data.DateOfExpiry);
+
+    formData.append("Password", data.Password);
+    formData.append("NumberOfBranches", data.NumberOfBranches);
+    formData.append("NumberOfActiveBranches", data.NumberOfActiveBranches);
+    formData.append("Status", data.Status);
+    formData.append("SubscriptionPlan", data.SubscriptionPlan);
+
+
     try {
       const response = await axios.post(
         "http://localhost:3000/api/register",
-        data,
+        formData,
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
           },
           withCredentials: true,
         }
@@ -50,8 +90,7 @@ function RegisterRest() {
         navigate("/home");
       }
     } catch (error) {
-            alert(error);
-
+      alert("Error during signup");
       console.error("Error during signup:", error);
     }
   };
@@ -165,6 +204,24 @@ function RegisterRest() {
           </div>
         </div>
 
+        <div>
+          <label
+            htmlFor="Project_Images"
+            className="block text-lg font-semibold"
+          >
+            Restaurent Image
+          </label>
+          <input
+            name="Project_Images"
+            className="w-full p-3 mt-2 border-2 border-white bg-transparent text-white rounded-md file:border-2 file:border-white file:bg-transparent file:text-white file:rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            onChange={handleInputChange}
+            type="file"
+            accept="image/*"
+            multiple
+            required
+          />
+        </div>
+
         <div className="mb-6">
           <label className="block text-sm font-medium mb-2" htmlFor="Address">
             Address
@@ -260,7 +317,7 @@ function RegisterRest() {
             >
               Status
             </label>
-           
+
             <select
               id="Status"
               value={data.Status}

@@ -37,6 +37,8 @@ function VerifyOtp() {
         navigate("/home");
       }
     } catch (error) {
+      alert(error);
+
       console.error("Error during signup:", error);
     }
   };

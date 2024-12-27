@@ -37,6 +37,7 @@ function SignIn() {
         navigate("/verify-otp");
       }
     } catch (error) {
+      alert(error);
       console.error("Error during signin:", error);
     }
   };

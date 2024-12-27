@@ -34,7 +34,7 @@ export const activeRestaurents = async (req, res) => {
 
 export const inactiveRestaurents = async (req, res) => {
   try {
-    const query = { Status: "Inactive" };
+    const query = { Status: "InActive" };
 
     const totalRestaurents = await Rest.countDocuments(query);
 

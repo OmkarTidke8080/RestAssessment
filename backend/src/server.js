@@ -3,6 +3,11 @@ import express from "express";
 import connectDB from "./db/db.js";
 import cors from "cors";
 import bodyParser from "body-parser";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+
 const port = 3000;
 
 const app = express();
